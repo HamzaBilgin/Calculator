@@ -1,0 +1,31 @@
+.right{
+    width: 40%;
+    padding-top: 40px;
+    
+}
+ul{
+    list-style-type: none;
+    line-height: 30px;
+    padding: 0!important;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+li{
+    border: 1px solid black;
+    margin-top: 20px;
+    width: 45%;
+    margin-left: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+li span{
+    width: 75%;
+}
+li div{
+    width: 25%;
+    cursor: pointer;
+}
