@@ -8,16 +8,14 @@ let initialValue = 0;
 let operatorValue = "";
 let isWaiting = false;
 
-
-function takeBackCalculatedValue(){
+function takeBackCalculatedValue() {
   const savedValueText = document.querySelectorAll(".right__ul .right__li");
-  savedValueText.forEach((li,index) =>{
-    li.addEventListener("click",  (e) =>{
+  savedValueText.forEach((li, index) => {
+    li.addEventListener("click", (e) => {
       if (e.target.tagName === "SPAN") {
         calculatorTitle.textContent = "";
         calculatorTitle.textContent = li.textContent.trim();
-      }
-      else{
+      } else {
         savedUl.removeChild(li);
       }
     });
@@ -142,9 +140,31 @@ function addRubbishAnimasyon() {
     divElement.addEventListener("mouseenter", function () {
       iElementRubbish.className = fadedClassRubbish;
     });
-
+    
     divElement.addEventListener("mouseleave", function () {
       iElementRubbish.className = originalClassRubbish;
     });
   });
 }
+
+
+function toggleElement() {
+  changeClass("left__history","bigger","smaller")
+  changeClass("calculatorButtons","active","pasif")
+}
+
+function changeClass(targetId,first,second){
+  var target = document.getElementById(targetId);
+  if(target.classList.contains(first)){
+    target.classList.add(second);
+    target.classList.remove(first)
+  }
+  else if(target.classList.contains(second)){
+    target.classList.add(first);
+    target.classList.remove(second)
+  }
+  else{
+    target.classList.add(first);
+  }
+}
+

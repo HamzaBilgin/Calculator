@@ -1,5 +1,6 @@
 .calculator {
   width: 500px;
+  height: 501.4px;
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
@@ -11,6 +12,8 @@
   color: white;
   border-radius: 10px 10px 0 0;
   text-align: right;
+
+  
 }
 .calculatorTitle h1 {
   margin: 0;
@@ -21,6 +24,10 @@
 }
 
 .calculatorButtons {
+  box-sizing: border-box;
+  position: absolute;
+  top: 13px;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
@@ -61,4 +68,81 @@ button:hover {
 }
 .result:hover {
   background: lightgreen;
+}
+
+.left__upDown{
+  margin: 2px;
+  display: flex;
+  background-color: white;
+  height: 13px;
+  justify-content: center;
+}
+
+.left__upDown i{
+  color: black;
+  margin-left: 2px;
+}
+.bigger{
+  background-color: rgb(210, 105, 30, 0.8);
+  animation: play 1s linear 1 normal both running;
+}
+
+.smaller{
+  background-color: rgb(210, 105, 30, 0.8);
+  animation: tersPlay 1s linear 1 normal both running;
+}
+
+.active{
+  /* display: none!important; */
+  animation: opacityRate 1s linear 1 normal both running;
+}
+
+.pasif{
+  /* display: none!important; */
+  animation: opacityRateReverse 1s linear 1 normal both running;
+}
+
+
+@keyframes play{
+  0%{
+    height: 0px;
+  }
+  100%{
+    height: 387.2px;
+  }
+}
+
+@keyframes tersPlay{
+  0%{
+    height: 387.2px;
+  }
+  100%{
+    height: 0px;
+  }
+}
+@keyframes opacityRate{
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+@keyframes opacityRateReverse{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.calculatorBottom{
+  position: relative;
+}
+.calculatorBottomTop{
+  position: absolute;
+  width: 100%;
+  z-index: 2;
 }

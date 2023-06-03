@@ -20,26 +20,40 @@
         <div class="calculator">
           <div class="calculatorTitle">
             <h1>0</h1>
+  
           </div>
-          <div class="calculatorButtons">
-            <button class="operator" value="+">+</button>
-            <button class="operator" value="-">-</button>
-            <button class="operator" value="*">×</button>
-            <button class="operator" value="/">÷</button>
-            <button value="7">7</button>
-            <button value="8">8</button>
-            <button value="9">9</button>
-            <button value="4">4</button>
-            <button value="5">5</button>
-            <button value="6">6</button>
-            <button value="1">1</button>
-            <button value="2">2</button>
-            <button value="3">3</button>
-            <button class="decimal" value=".">.</button>
-            <button value="0">0</button>
-            <button class="reset" id="resetButton">C</button>
-            <button class="result operator" value="=">=</button>
+          <div class="calculatorBottom">
+            <div class="calculatorBottomTop">
+              <div class="left__history" id="left__history">
+                
+              </div>
+              <div class="left__upDown" onclick="toggleElement()">
+                <i class="fa-sharp fa-solid fa-angle-down left__upDown__Down"></i>
+                <i class="fa-sharp fa-solid fa-angle-down fa-rotate-180"></i>
+              </div>
+            </div>
+            
+            <div class="calculatorButtons" id="calculatorButtons">
+              <button class="operator" value="+">+</button>
+              <button class="operator" value="-">-</button>
+              <button class="operator" value="*">×</button>
+              <button class="operator" value="/">÷</button>
+              <button value="7">7</button>
+              <button value="8">8</button>
+              <button value="9">9</button>
+              <button value="4">4</button>
+              <button value="5">5</button>
+              <button value="6">6</button>
+              <button value="1">1</button>
+              <button value="2">2</button>
+              <button value="3">3</button>
+              <button class="decimal" value=".">.</button>
+              <button value="0">0</button>
+              <button class="reset" id="resetButton">C</button>
+              <button class="result operator" value="=">=</button>
+            </div>
           </div>
+          
         </div>
         <div class="right--arrow">
           <i class="fa-solid fa-arrow-right-long"></i>
@@ -47,18 +61,13 @@
       </div>
 
       <div class="right">
-        <ul class="right__ul" id="right__ul">
-          <li class="right__li">
-            <span class="righ__span">9</span>
-            <div class="right__rubbish"><i class="fa-solid fa-trash"></i></div>
-          </li>
-          <li class="right__li">
-            <span class="righ__span">95</span>
-            <div class="right__rubbish"><i class="fa-solid fa-trash"></i></div>
-          </li>
-        </ul>
+        <ul class="right__ul" id="right__ul"></ul>
       </div>
     </div>
+    <script
+      src="https://kit.fontawesome.com/2ce1731240.js"
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://kit.fontawesome.com/2ce1731240.js"
       crossorigin="anonymous"
