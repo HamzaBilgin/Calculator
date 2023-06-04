@@ -25,11 +25,13 @@
           <div class="calculatorBottom">
             <div class="calculatorBottomTop">
               <div class="left__history" id="left__history">
-                
               </div>
               <div class="left__upDown" onclick="toggleElement()">
-                <i class="fa-sharp fa-solid fa-angle-down left__upDown__Down"></i>
-                <i class="fa-sharp fa-solid fa-angle-down fa-rotate-180"></i>
+                <div id="left__upDown__i">
+                  <i class="fa-sharp fa-solid fa-angle-down" ></i>
+
+                </div>               
+                 <!-- <i class="fa-sharp fa-solid fa-angle-down fa-rotate-180"></i> -->
               </div>
             </div>
             
@@ -49,7 +51,7 @@
               <button value="3">3</button>
               <button class="decimal" value=".">.</button>
               <button value="0">0</button>
-              <button class="reset" id="resetButton">C</button>
+              <button class="reset" id="resetButton" value="C">C</button>
               <button class="result operator" value="=">=</button>
             </div>
           </div>

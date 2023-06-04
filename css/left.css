@@ -146,3 +146,33 @@ button:hover {
   width: 100%;
   z-index: 2;
 }
+
+.rotate{
+  animation: rototeAnimasyon 1s linear 1 normal both running;
+}
+.reverseRotate{
+  animation: reverseRototeAnimasyon 1s linear 1 normal both running;
+}
+
+@keyframes rototeAnimasyon{
+  0%{
+    transform:rotate(0deg);
+  }
+  100%{
+    transform:rotate(180deg);
+  }
+}
+
+@keyframes reverseRototeAnimasyon{
+  0%{
+    transform:rotate(180deg);
+  }
+  100%{
+    transform:rotate(360deg);
+  }
+}
+
+.left__history{
+  overflow-y: scroll;
+}
+

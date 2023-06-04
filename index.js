@@ -4,9 +4,47 @@ const resetButton = document.getElementById("resetButton");
 let savedUl = document.getElementById("right__ul");
 const arrow = document.querySelector(".right--arrow");
 let savedValueList = [];
-let initialValue = 0;
-let operatorValue = "";
-let isWaiting = false;
+let willCalculateValue = calculatorTitle.innerHTML;
+
+calculate(willCalculateValue);
+function calculate(value){
+  document.addEventListener('DOMContentLoaded', function() {
+    const calculatorTitle = document.querySelector('.calculatorTitle h1');
+    const calculatorButtons = document.querySelector('#calculatorButtons');
+
+    // let result = '';
+    calculatorTitle.textContent = '0';
+  
+    calculatorButtons.addEventListener('click', function(e) {
+      result = calculatorTitle.innerHTML === "0" ? '' : calculatorTitle.innerHTML ;
+
+      const value = e.target.value;
+      if (value) {
+        if (value === '=') {
+          try {
+            result = eval(result).toString();
+          } catch (error) {
+            result = 'Hatalı işlem';
+          }
+        } else if (value === 'C') {
+          result = '0';
+        } else {
+          if(result === "0"){
+            result = '';
+          }
+          result += value;
+        }
+  
+        calculatorTitle.textContent = result;
+      }
+    });
+  
+  });
+}
+
+
+
+
 
 function takeBackCalculatedValue() {
   const savedValueText = document.querySelectorAll(".right__ul .right__li");
@@ -21,6 +59,13 @@ function takeBackCalculatedValue() {
     });
   });
 }
+
+
+
+
+
+
+
 //arrow a tıklanınca sağda eklenen numarayı listeler --- baslangıc
 function saveArrow(number) {
   savedValueList.push(number);
@@ -46,73 +91,35 @@ function saveArrow(number) {
 }
 arrow.addEventListener("click", () => saveArrow(calculatorTitle.textContent));
 //arrow a tıklanınca sağda eklenen numarayı listeler --- SON
-function sendNumberValue(number) {
-  //   console.log(number);
-  //   calculatorTitle.textContent = number;
 
-  if (isWaiting) {
-    calculatorTitle.textContent = number;
-    isWaiting = false;
-  } else {
-    const displayValue = calculatorTitle.textContent;
-    calculatorTitle.textContent =
-      displayValue === "0" ? number : displayValue + number;
-  }
-}
 
-function addDecimal() {
-  if (!calculatorTitle.textContent.includes(".")) {
-    calculatorTitle.textContent = `${calculatorTitle.textContent}.`;
-  }
-}
 
-function useOperator(operator) {
-  const currentValue = Number(calculatorTitle.textContent);
 
-  if (operatorValue && isWaiting) {
-    operatorValue = operator;
-    return;
-  }
 
-  if (!initialValue) {
-    initialValue = currentValue;
-  } else {
-    const calculation = calc[operatorValue](initialValue, currentValue);
-    calculatorTitle.textContent = calculation;
-    initialValue = calculation;
-  }
-  isWaiting = true;
-  operatorValue = operator;
-}
 
-const calc = {
-  "/": (firstNumber, secondNumber) => firstNumber / secondNumber,
-  "*": (firstNumber, secondNumber) => firstNumber * secondNumber,
-  "+": (firstNumber, secondNumber) => firstNumber + secondNumber,
-  "-": (firstNumber, secondNumber) => firstNumber - secondNumber,
-  "=": (firstNumber, secondNumber) => secondNumber,
-};
 
-buttons.forEach((button) => {
-  if (button.classList.length === 0) {
-    button.addEventListener("click", () => sendNumberValue(button.value));
-  } else if (button.classList.contains("operator")) {
-    button.addEventListener("click", () => useOperator(button.value));
-  } else if (button.classList.contains("decimal")) {
-    button.addEventListener("click", () => addDecimal());
-  }
-});
-//REsetleme işlemi yapar Js baslangıcı
-function resetAll() {
-  calculatorTitle.textContent = "0";
-  initialValue = 0;
-  operatorValue = "";
-  isWaiting = false;
-}
 
-resetButton.addEventListener("click", resetAll);
-//REsetleme işlemi yapar Js sonu
-// Arrow Hover
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Arrow Hover --- BASLANGİC
 var divElement = document.querySelector(".right--arrow");
 var iElement = divElement.querySelector("i");
 
@@ -126,9 +133,8 @@ divElement.addEventListener("mouseenter", function () {
 divElement.addEventListener("mouseleave", function () {
   iElement.className = originalClass;
 });
-
-// delete rubbish hover
-// const divElementRubbish = document.querySelectorAll(".right__rubbish");
+// Arrow Hover --- SONU
+// delete rubbish hover --- BASLANGİC
 function addRubbishAnimasyon() {
   const divElementRubbish = document.querySelectorAll(".right__rubbish");
 
@@ -146,11 +152,12 @@ function addRubbishAnimasyon() {
     });
   });
 }
-
-
+// delete rubbish hover --- SON
+//hesap makinesinde geçmişi açıp kapamayı sağlar --- BASLANGİC
 function toggleElement() {
   changeClass("left__history","bigger","smaller")
   changeClass("calculatorButtons","active","pasif")
+  changeClass("left__upDown__i","rotate","reverseRotate")
 }
 
 function changeClass(targetId,first,second){
@@ -167,4 +174,4 @@ function changeClass(targetId,first,second){
     target.classList.add(first);
   }
 }
-
+//hesap makinesinde geçmişi açıp kapamayı sağlar --- SON
