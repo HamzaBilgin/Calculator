@@ -5,9 +5,31 @@ let savedUl = document.getElementById("right__ul");
 const arrow = document.querySelector(".right--arrow");
 let savedValueList = [];
 let willCalculateValue = calculatorTitle.innerHTML;
+let savedHistory = [];
+const leftHistory = document.getElementById("left__history");
+let lastValue = "";
+let equalCounter = 0;
 
-calculate(willCalculateValue);
-function calculate(value){
+function takeValueFromHistory() {
+  const textRight = document.querySelectorAll(".left__history .textRight");
+  
+  textRight.forEach((p) => {
+    p.removeEventListener("click", handleHistoryClick);
+  });
+
+  textRight.forEach((p) => {
+    p.addEventListener("click", handleHistoryClick);
+  });
+}
+
+function handleHistoryClick() {
+
+  let text = calculatorTitle.textContent;
+  text += this.innerHTML;
+  calculatorTitle.textContent = (lastValue === "+" || lastValue === "-" || lastValue === "*" || lastValue === "/") ? text : this.innerHTML;
+}
+calculate();
+function calculate(){
   document.addEventListener('DOMContentLoaded', function() {
     const calculatorTitle = document.querySelector('.calculatorTitle h1');
     const calculatorButtons = document.querySelector('#calculatorButtons');
@@ -20,9 +42,12 @@ function calculate(value){
 
       const value = e.target.value;
       if (value) {
+        lastValue = value;
         if (value === '=') {
           try {
-            result = eval(result).toString();
+            equalCounter = 1;
+            result = (eval(result)).toFixed(2).toString();
+            saveToHistory(calculatorTitle.innerHTML,Number(result).toFixed(2))
           } catch (error) {
             result = 'Hatalı işlem';
           }
@@ -32,7 +57,16 @@ function calculate(value){
           if(result === "0"){
             result = '';
           }
-          result += value;
+          if(equalCounter === 1){
+            let newValue = result ;
+            newValue += value;
+            result = (value === "+" || value === "-" || value === "*" || value === "/") ? newValue : value;
+            equalCounter = 0;
+          }
+          else{
+            result += value;
+          }
+          
         }
   
         calculatorTitle.textContent = result;
@@ -42,29 +76,71 @@ function calculate(value){
   });
 }
 
+function saveToHistory(value,result){
+  const divElementHistory = document.createElement("div");
+  const pElement1 = document.createElement("p");
+  pElement1.textContent = value;
+  pElement1.className = "textLeft";
+  const pElement2 = document.createElement("p");
+  pElement2.textContent = result;
+  pElement2.className = "textRight";
+  const hrElement = document.createElement("hr");
+  const firstChild = leftHistory.firstChild;
+  leftHistory.insertBefore(divElementHistory, firstChild);
 
 
-
-
-function takeBackCalculatedValue() {
-  const savedValueText = document.querySelectorAll(".right__ul .right__li");
-  savedValueText.forEach((li, index) => {
-    li.addEventListener("click", (e) => {
-      if (e.target.tagName === "SPAN") {
-        calculatorTitle.textContent = "";
-        calculatorTitle.textContent = li.textContent.trim();
-      } else {
-        savedUl.removeChild(li);
-      }
-    });
-  });
+  divElementHistory.appendChild(pElement1);
+  divElementHistory.appendChild(pElement2);
+  divElementHistory.appendChild(hrElement);
+  const weatherData = {
+    value : value,
+    result : result,
+  };
+  savedHistory.push(weatherData);
+  takeValueFromHistory();
 }
 
 
+// Daha önce kaydedilmiş hesaplamaları geri getirir - BASLANGIC
+function takeBackCalculatedValue() {
+  const savedValueText = document.querySelectorAll(".right__ul .right__li");
+  savedValueText.forEach((li, index) => {
+    li.removeEventListener("click", handleBackCalculatedValue);
+    li.addEventListener("click", handleBackCalculatedValue);
+  });
+}
+
+function handleBackCalculatedValue(e) {
+  const li = e.currentTarget;
+  if (e.target.tagName === "SPAN") {
+    let text = calculatorTitle.textContent;
+    text += li.textContent.trim();
+    calculatorTitle.textContent = (lastValue === "+" || lastValue === "-" || lastValue === "*" || lastValue === "/") ? text : li.textContent.trim();
+  } else {
+    savedUl.removeChild(li);
+  }
+}
 
 
+// function takeValueFromHistory() {
+//   const textRight = document.querySelectorAll(".left__history .textRight");
+  
+//   textRight.forEach((p) => {
+//     p.removeEventListener("click", handleHistoryClick);
+//   });
 
+//   textRight.forEach((p) => {
+//     p.addEventListener("click", handleHistoryClick);
+//   });
+// }
 
+// function handleHistoryClick() {
+
+//   let text = calculatorTitle.textContent;
+//   text += this.innerHTML;
+//   calculatorTitle.textContent = (lastValue === "+" || lastValue === "-" || lastValue === "*" || lastValue === "/") ? text : this.innerHTML;
+// }
+// Daha önce kaydedilmiş hesaplamaları geri getirir - SON
 
 //arrow a tıklanınca sağda eklenen numarayı listeler --- baslangıc
 function saveArrow(number) {
@@ -91,27 +167,6 @@ function saveArrow(number) {
 }
 arrow.addEventListener("click", () => saveArrow(calculatorTitle.textContent));
 //arrow a tıklanınca sağda eklenen numarayı listeler --- SON
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

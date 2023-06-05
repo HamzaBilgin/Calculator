@@ -173,6 +173,24 @@ button:hover {
 }
 
 .left__history{
+  height: 0px;
   overflow-y: scroll;
+}
+
+.left__history p{
+    margin: 10px;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 100;
+    color: white;
+}
+
+.textLeft{
+  text-align: left;
+}
+
+.textRight{
+  text-align: right;
+  cursor: pointer;
 }
 
